@@ -4,16 +4,21 @@ import path from "path";
 // import { fileURLToPath, URL } from "node:url";
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  /*  resolve: {
+export default defineConfig(({ mode }) => {
+  const isProd = mode === "production";
+
+  return {
+    base: isProd ? "/TodoList/" : "/",
+    plugins: [react()],
+    /*  resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   }, */
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+      },
     },
-  },
+  };
 });
